@@ -1,0 +1,23 @@
+struct ListNode{
+   int val;
+   ListNode* next;
+   ListNode(int x):val(x), next(NULL) {}
+};
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(!head) return head;
+        ListNode *cur = head;
+        ListNode *cn = head->next;
+        head->next = NULL;
+        ListNode *nn;
+        while(cn!=NULL){
+            nn=cn->next;
+            cn->next=cur;
+            cur=cn;
+            cn=nn;
+        }
+        head = cur;
+    }
+};
