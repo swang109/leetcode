@@ -2,8 +2,9 @@ class Solution {
 public:
     int totalNQueens(int n) {
         vector<bool> col(n,false);
-        vector<bool> diag1(2*n-1,false);
-        vector<bool> diag2(2*n-1,false); 
+        vector<bool> diag1(2*(n-1),false);
+        vector<bool> diag2(2*(n-1),false);
+	//the row+col/row-col value in same antidiagonal/diagonal is the same
         int result = 0;
         totalNQueensHelper(0,n,col,diag1,diag2,result);
         return result;
