@@ -7,17 +7,13 @@ struct ListNode{
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if(!head) return head;
-        ListNode *cur = head;
-        ListNode *cn = head->next;
-        head->next = NULL;
-        ListNode *nn;
-        while(cn!=NULL){
-            nn=cn->next;
-            cn->next=cur;
-            cur=cn;
-            cn=nn;
+        ListNode *pre=NULL, *cur=head, *next;
+        while(cur!=NULL){
+            next=cur->next;
+            cur->next=pre;
+            pre=cur;
+            cur=next;
         }
-        head = cur;
+        return pre;
     }
 };
