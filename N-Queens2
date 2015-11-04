@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int totalNQueens(int n) {
+        vector<bool> col(n,false);
+        vector<bool> diag1(2*n-1,false);
+        vector<bool> diag2(2*n-1,false); 
+        int result = 0;
+        totalNQueensHelper(0,n,col,diag1,diag2,result);
+        return result;
+    }
+    
+    void totalNQueensHelper(int row, int n,vector<bool> &col, vector<bool> &diag1, vector<bool> &diag2, int &result){
+        if(row==n){
+            result++;
+            return;
+        }
+        for(int c=0;c<n;c++){
+            if(!col[c]&&!diag2[row+c]&&!diag1[row-c+n-1]){
+                col[c]=diag2[row+c]=diag1[row-c+n-1]=true;
+                totalNQueensHelper(row+1,n,col,diag1,diag2,result);
+                col[c]=diag2[row+c]=diag1[row-c+n-1]=false;
+            }
+        }
+    }
+};
