@@ -1,0 +1,24 @@
+class Solution {
+    //binary search
+public:
+    int findPeakElement(vector<int>& nums) {
+        return helper(nums,0,nums.size()-1);
+    }
+    
+    int helper(vector<int>& nums, int beg, int end){
+        if(beg==end){
+            return beg;
+        }
+        if(beg+1==end){
+            if(nums[beg]>nums[end]) return beg;
+            return end;
+        }
+        int mid = (beg+end)/2;
+        if(nums[mid]>nums[mid-1]&&nums[mid]>nums[mid+1]) return mid;
+        if(nums[mid]<nums[mid+1]){ //the bigger side must have a peak
+            return helper(nums,mid+1,end);
+        }else{
+            return helper(nums,beg,mid-1);
+        }
+    }
+};
