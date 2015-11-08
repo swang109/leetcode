@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int calculate(string s) {
+        stack<int> signs;
+        int sign = 1;
+        int num=0, ans=0;
+        signs.push(sign);
+        for(auto c: s){
+            if(c>='0'&&c<='9'){
+                num=num*10+(c-'0');
+            }else if(c=='+'||c=='-'){ //meaning there is an num to be calculate
+                ans = ans + signs.top()*sign*num;
+                num=0;
+                sign=(c=='+'?1:-1);
+            }else if(c=='('){ //record the sign of the parenthesis
+                signs.push(sign*signs.top());
+                sign = 1;
+            }else if(c==')'){ //also meaning there is an num to be calculate
+                ans = ans +signs.top()*sign*num;
+                signs.pop();
+                num=0;
+                sign = 1;
+            }
+        }
+        if(num){ //1+10 calculate 10
+            ans = ans +signs.top()*sign*num;
+        }
+        return ans;
+    }
+};
