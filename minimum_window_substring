@@ -1,0 +1,41 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        if(s.empty()||t.empty()){
+            return "";
+        }
+        int count = t.size();
+        int required[128]={0};//how many this char is required
+        bool chSet[128]={false}; //if this char is required
+        for(int i=0;i<count;i++){
+            required[t[i]]++;
+            chSet[t[i]]=true;
+        }
+        //two pointers 
+        int start = 0, end = -1;
+        int minStart=0,minLen=INT_MAX;
+       
+        while(start<(int)s.size()&&end<(int)s.size()){ //(int) is necessary
+            if(count){
+                end++;
+                required[s[end]]--; //you want this to be outside the if{} T="ABC" S="ABBBBBBC"
+                if(chSet[s[end]]&&required[s[end]]>=0){
+                    count--;
+                }
+            }else{
+                if(minLen>end-start+1){
+                    minLen = end-start+1;
+                    minStart = start;
+                }
+                required[s[start]]++;
+                if(chSet[s[start]]&&required[s[start]]>0){
+                    count++;
+                }
+                start++;
+            }
+        }
+        if(minLen==INT_MAX) return "";
+        return s.substr(minStart,minLen);
+        
+    }
+};
