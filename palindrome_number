@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool isPalindrome(int x){
+        if(x<0 || (x!=0&&x%10==0)) return false; //1000000
+        int reversed = 0;
+        while(x>reversed){ //only reverse half , doesnt work for 10000
+            reversed = reversed*10 + x%10;
+            x = x/10;
+        }
+        return (x==reversed)||(x==reversed/10);
+    }
+    //compare front and end
+    /*bool isPalindrome(int x) {
+        if(x<0) return false;
+        int n = 1;
+        while(x/n>=10){
+            n*=10;
+        }
+        
+        int f,l;
+        while(x!=0){
+            l=x%10;
+            f=x/n;
+            x=x%n;
+            x=x/10;
+            n=n/100;
+            if(l!=f) return false;
+        }
+        return true;
+    }*/
+};
