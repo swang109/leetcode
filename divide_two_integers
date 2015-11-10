@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if(divisor==0 || dividend==INT_MIN&&divisor==-1){ //abs(INT_MIN) = INT_MAX + 1
+            return INT_MAX;
+        }
+        int sign = ((dividend<0)^(divisor<0))?-1:1;
+        long long dvd = labs(dividend);
+        long long dvs = labs(divisor);
+        int result = 0;
+        while(dvd>=dvs){       //  15/3 = 4*3+3 = 5*3
+            long long multiple = 1; 
+            long long tmp = dvs;
+            while(dvd>=(tmp<<1)){
+                tmp<<=1;
+                multiple<<=1;
+            }
+            dvd-=tmp;
+            result+=multiple;
+        }
+        return sign==1?result:-result;
+    }
+};
