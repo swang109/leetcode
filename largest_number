@@ -1,0 +1,18 @@
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        vector<string> strings;
+        for(auto i:nums){
+            strings.push_back(to_string(i));
+        }
+        sort(strings.begin(),strings.end(),[](string &s1,string &s2){return s1+s2>s2+s1;});
+        string result;
+        for(auto s:strings){
+            result+=s;
+        }
+        while(result[0]=='0'&&result.length()>1){
+            result.erase(0,1);  //for case 000000
+        }
+        return result;
+    }
+};
