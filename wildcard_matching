@@ -1,0 +1,62 @@
+class Solution1 {
+//DP
+public:
+    bool isMatch(string s, string p) {
+        int m=s.length (), n=p.length();
+        vector<vector<bool>> dp(m+1, vector<bool>(n+1, false));
+        dp[0][0] = true;
+        for(int j = 1; j<=n; j++){
+            if(p[j-1]=='*'&&dp[0][j-1]) dp[0][j]=true;
+            for(int i=1; i<=m; i++){
+                if(p[j-1]!='*'){
+                    dp[i][j]=dp[i-1][j-1]&&(s[i-1]==p[j-1]||p[j-1]=='?');
+                }else{
+                    dp[i][j]=dp[i-1][j]||dp[i][j-1];
+                }
+            }
+        }
+        return dp[m][n];
+    }
+    /*
+                 a b e f c d g i e s c d f i m d e
+           1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+        a  0 1
+        b  0 0 1
+        *  0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        c
+        d
+        ?
+        i
+        *
+        d
+        e
+
+            a b
+          1 0 0
+        * 1 1 1
+        a 0 1 0
+    */
+};
+
+
+
+//linear time solution
+class Solution2 {
+public:
+    bool isMatch(string s, string p) {
+        int si = 0, pi = 0, starindex=-1, ss=0; //ss is the string start from last star
+        int slength = s.length(), plength = p.length();
+        while(si<slength){
+            //current chars matches
+            if(p[pi]=='?'||s[si]==p[pi]) {si++,pi++;continue;}
+            //* found, track index of *, only advancing pattern pointer
+            if(p[pi]=='*'){starindex=pi++; ss=si; continue;}
+            //current chars not matching, last pattern pointer was *, current pointer is not *, only advancing pattern pointer
+            if(starindex!=-1) {pi=starindex+1; si=++ss; continue;}
+            //do not match
+            return false;
+        }
+        while(p[pi]=='*') pi++;
+        return pi==plength;
+    }
+};
