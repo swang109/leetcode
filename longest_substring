@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> dict(256, -1);
+        int maxLength = 0, start = -1;
+        for(int i=0;i<s.length();i++){
+            if(dict[s[i]]>start){ //meaning duplicate in the current substr
+                start=dict[s[i]]; //restart a new string
+                cout<<"here";
+            }
+            dict[s[i]]=i;
+            maxLength=max(maxLength,i-start);
+        }
+        return maxLength;
+    }
+};
