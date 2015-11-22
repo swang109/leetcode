@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ 
+ /*
+ pre-order traversal is root-left-right, and post order is left-right-root. modify the code for pre-order to make it root-right-left, and then reverse the output so that we can get left-right-root .
+*/
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        stack<TreeNode*> stack;
+        vector<int> result;
+        if(root==NULL) return result;
+        stack.push(root);
+        while(!stack.empty()){
+            TreeNode* node = stack.top();
+            stack.pop();
+            result.push_back(node->val);
+            if(node->left)
+                stack.push(node->left);
+            if(node->right)
+                stack.push(node->right);
+        }
+        reverse(result.begin(),result.end());
+        return result;
+    }
+};
