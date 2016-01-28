@@ -12,7 +12,7 @@ public:
         if(lists.empty()) return NULL;
         while(lists.size()>1){
             lists.push_back(merge2Lists(lists[0],lists[1]));
-            lists.erase(lists.begin());
+            lists.erase(lists.begin());  //erase
             lists.erase(lists.begin());
         }
         return lists[0];
@@ -26,7 +26,7 @@ public:
             return l1;
         }
         if(l1->val<l2->val){
-            l1->next=merge2Lists(l1->next,l2);
+            l1->next=merge2Lists(l1->next,l2);  //recursive 递归
             return l1;
         }else{
             l2->next=merge2Lists(l2->next,l1);
@@ -34,3 +34,6 @@ public:
         }
     }
 };
+
+
+//time complexity is kn(lgk), k/2(2n) + k/4(4n) + k/8*(8n)... + = logk * (kn)

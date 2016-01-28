@@ -25,7 +25,7 @@ public:
     }
     
     ListNode* merge(ListNode *h1, ListNode *h2){
-        ListNode* result = new ListNode(1);
+        ListNode *result = new ListNode(1);
         ListNode *cur = result;
         while(h1!=NULL&&h2!=NULL){
             if(h1->val < h2->val){
