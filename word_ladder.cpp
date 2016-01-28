@@ -3,7 +3,7 @@ public:
 //BFS
     int ladderLength(string beginWord, string endWord, unordered_set<string>& wordList) {
         wordList.insert(endWord);
-        queue<string> toVisit;
+        queue<string> toVisit;  //this is an queue
         int dist = 2;
         addNeighbor(beginWord,wordList,toVisit);
         while(!toVisit.empty()){
