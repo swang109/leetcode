@@ -33,5 +33,6 @@ int main(){
         cout<<"unhappy test result:"<<solution.isHappy(uh)<<"\n";	
         return 0;
 };
-aassldkffdsfjalskdfjlasadfskdjflaksjdflkasjdflkasjdlsdfkjalskdfjldsf
-
+lalalalalalaG
+xxxxidkffdsfjaasdfasdfagfdglghfsghkghjdhjkfhjkjhjkHHHHHHEEEEEEEEEELLLLLLLLLLLLLLLLLOOOOOOOOOOOOO      buADDDDD
+asdflksajfdl
